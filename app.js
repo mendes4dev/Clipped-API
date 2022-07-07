@@ -21,7 +21,7 @@ async function login(username, password){
     return token
 }
 
-async function GetPersonalData(token){
+async function getPersonalData(token){
     var data = {
         name: "",
         course: "",
@@ -74,7 +74,7 @@ app.get('/',(req,res)=>{
 
 app.get('/personaldata',(req,res)=>{
     (async() => {
-        const data = await GetPersonalData(req.headers.token)
+        const data = await getPersonalData(req.headers.token)
         res.send(data)
     })();  
 })
