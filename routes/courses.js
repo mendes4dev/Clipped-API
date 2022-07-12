@@ -38,13 +38,11 @@ async function getCoursesOfYear(token,year){
         page.click('body > div:nth-child(6) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(4) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child('+(indexWanted+1)+') > td > em > a'),
         page.waitForNavigation({waitUntil: 'networkidle2'})
     ])
-    //td.selecção_1_1:nth-child(2) > a:nth-child(1)
     const courses = await page.evaluate(()=>{
       return Array.from(document.querySelectorAll('body > table:nth-child(5) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(3) > div:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(4) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(2) > td:nth-child(2) > em:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr > td > a')).map(
             x => x.textContent
         )
     })
-    await page.screenshot({path:"works.png"})
     await browser.close()
     return courses
 }
@@ -66,7 +64,7 @@ router.get('/coursesYear',(req,res)=>{
     (async() => {
         const data = await getCoursesOfYear(req.headers.token,req.headers.year)
         res.send(data)
-    })();   
+    })();  
 })
 
 module.exports = router;

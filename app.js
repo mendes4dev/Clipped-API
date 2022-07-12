@@ -5,8 +5,10 @@ const app = express()
 
 // Import Routes
 const coursesRoute = require('./routes/courses');
+const courseRoute = require('./routes/courseData');
 
 app.use('/courses',coursesRoute)
+app.use('/course',courseRoute)
 
 async function login(username, password){
     const browser = await puppeteer.launch()
